@@ -7,9 +7,9 @@
 
 IDE: neovim
 
-LSP: jdtls, nvim-jdtls, lemminx(Maven/Gradle 설정파일 용도)
+LSP: jdtls, nvim-jdtls(없어도 됨), lemminx(Maven/Gradle 설정파일 용도)
 
-Java version: 21
+Java version: 21 Temurin
 
 ## MD 문법
 MD(MarkDown)문법이 익숙하지 않은 분들을 위해 간단히 설명합니다.
