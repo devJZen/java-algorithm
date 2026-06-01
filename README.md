@@ -7,7 +7,7 @@
 
 IDE: neovim
 
-LSP: jdtls, nvim-jdtls(없어도 됨), lemminx(Maven/Gradle 설정파일 용도)
+LSP: jdtls, nvim-jdtls(nvim 사용시 필수임), lemminx(Maven/Gradle 설정파일 용도)
 
 Java version: 21 Temurin
 
