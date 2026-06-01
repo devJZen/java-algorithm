@@ -1,9 +1,15 @@
 # java-algorithm
 
 모든 파일은 MD 파일로 작성합니다.
-과제 할당은 Discord로 관리합니다. 실습 및 검토는 Claude가 합니다.
+과제 할당은 Discord로 관리합니다. 실습 검토는 Claude가 합니다.(알고리즘 채점)
 
 기간: `2026-06-02` ~ `2026-06-06`
+
+IDE: neovim
+
+LSP: jdtls, nvim-jdtls(nvim 사용시 필수임), lemminx(Maven/Gradle 설정파일 용도)
+
+Java version: 21 Temurin
 
 ## MD 문법
 MD(MarkDown)문법이 익숙하지 않은 분들을 위해 간단히 설명합니다.
