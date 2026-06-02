@@ -52,6 +52,11 @@ _글자의 기울임_ : 강조할 언어를 `_텍스트_`로 감쌉니다.
 [Java Syntax](https://www.w3schools.com/java/java_syntax.asp),
 [자바 문법,Wiki](https://en.wikipedia.org/wiki/Java_syntax)
 
+# Java의 기본 학습
+
+[오라클 공식문서](https://docs.oracle.com/javase/tutorial/)
+[JLS](https://docs.oracle.com/javase/specs/)
+
 # 자료구조와 기본 알고리즘
 
 only for study
@@ -61,10 +66,14 @@ reference credit:
 - [leet code](http://leetcode.com/)
 - [english wikipedia sorting and search example](https://en.wikipedia.org/wiki/Bubble_sort)
 
+## 자료구조와 알고리즘이란?
+
 - 자료구조, 알고리즘의 어원과 정의
 - 알고리즘의 역사
 - 알고리즘의 표현
 - 알고리즘의 분석, 복잡성이란 무엇인가?
+
+# 학습 진행도
 
 날짜 | 분류 | 명명 | 구현
 --- | --- | --- | ---
@@ -93,9 +102,20 @@ reference credit:
 2026-06-05 | 알고리즘 | 기수 정렬 | [링크1]()
 2026-06-05 | 알고리즘 | Tim 정렬 | [링크1]()
 
-# 과제
+# 과제 확인
 
-# 공부 후기
+날짜/회차 | 내용 | 확인 | 비고
+--- | --- | --- | ---
+2026-06-02/1회차 | 프로젝트 세팅, 버블정렬 | IT | 자료구조:자료형 부터 2회차 시작
+2026-06-02/1회차 | 1-2회차 학습준비 및 검토(누락으로 git 설정 방법부터 자료공유) | devJZen | 3-4회차 학습 준비, neovim 세팅이 생각보다 오래걸림. java 컴파일 속도 높이는 방법 찾아보기
+
+# 과제 회고
+
+날짜/회차 | 회고 및 내용 | 작성자 | 비고
+--- | --- | --- | ---
+2026-06-02/1회차 | 프로젝트 준비를 완벽하지 못 했던게 아쉽고 온보딩을 위해서 봇을 준비하는 것도 나쁘지 않겠다고 느꼈다. 알고리즘 공부에 백준과 리트코드가 참 좋다는 것이고 이제껏 다른 개발자 분들의 풍요로움으로 lua 세팅에 어려움이 없었으나 java cfg을 직접 해보니 어려웠다. | devJZen | 2회차-3회차 학습 준비
+2026-06-02/1회차 | 내용 쓰시면 됩니다. | IT | git 학습 중이어서 대신 작성합니다.
+
 
 ## devJZen
 
