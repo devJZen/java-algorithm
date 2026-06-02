@@ -48,11 +48,18 @@ _글자의 기울임_ : 강조할 언어를 `_텍스트_`로 감쌉니다.
 
 # Java 기본 문법
 
-[자바 (프로그래밍 언어), Wiki](https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4))
-[Java Syntax](https://www.w3schools.com/java/java_syntax.asp)
+[자바 (프로그래밍 언어), Wiki](https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4)),
+[Java Syntax](https://www.w3schools.com/java/java_syntax.asp),
 [자바 문법,Wiki](https://en.wikipedia.org/wiki/Java_syntax)
 
 # 자료구조와 기본 알고리즘
+
+only for study
+reference credit:
+
+- [백준](https://www.acmicpc.net/)
+- [leet code](http://leetcode.com/)
+- [english wikipedia sorting and search example](https://en.wikipedia.org/wiki/Bubble_sort)
 
 - 자료구조, 알고리즘의 어원과 정의
 - 알고리즘의 역사
