@@ -90,8 +90,8 @@ Questions
 
 # 학습 진행도
 
-> 구현 제출은 각 참여자 폴더의 `src/main/` 하위에 작성하세요. (예: `devJZen/src/main/`, `IT/src/main/`)  
-> 기본 문법 참고: [`devJZen/src/main/study/Java-Basic.md`](devJZen/src/main/study/Java-Basic.md)
+> 구현 제출은 각 참여자 폴더의 `src/main/` 하위에 작성하세요. (예: `devJZen/src/main/`, `IT/src/main/`)
+> 공부방법에 대해서 고민했는데 서로 풀이방법에 대해서 설명한 것을 기록해야겠다고 느꼈다.
 
 ## 1회차 (2026-06-02) — [Summary](devJZen/docs/2026-06-02-Summary.md)
 
@@ -189,4 +189,4 @@ Questions
 날짜 | 내용 | 작성자
 --- | --- | ---
 2026-06-03 | devJZen/docs 저작권 정비 (Oracle 링크 출처 추가, 문제 설명 직접 서술로 교체), 06-03 Summary 날짜·참고자료 추가, 06-04 Summary 신규 생성 (스택/큐/덱, 병합·카운팅·힙 정렬), README 레퍼런스 정리 | devJZen
-2026-06-03 | 06-05 Summary 신규 생성 (셸·기수·Tim 정렬, 전체 정렬 비교표), study/Java-Basic.md 신규 생성 (class·void·static·어노테이션·기본 자료형·List), study/Example.java 업데이트, README 학습 진행도 1~4회차 구조화 (Summary 링크 + 구현 제출 칸), 과제 확인·회고 2~4회차 행 추가 | devJZen
+2026-06-03 | 06-05 Summary 신규 생성 (셸·기수·Tim 정렬, 전체 정렬 비교표), study/Example.java 업데이트, README 학습 진행도 1~4회차 구조화 (Summary 링크 + 구현 제출 칸), 과제 확인·회고 2~4회차 행 추가 | devJZen
