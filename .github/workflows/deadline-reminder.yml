@@ -1,0 +1,29 @@
+name: Deadline Reminder
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 매일 오전 9시 KST (UTC 00:00)
+  workflow_dispatch:       # 수동 실행 가능
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml requests
+
+      - name: Send deadline reminders
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          KAKAO_CLIENT_ID: ${{ secrets.KAKAO_CLIENT_ID }}
+          KAKAO_REFRESH_TOKENS: ${{ secrets.KAKAO_REFRESH_TOKENS }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python .github/scripts/send_deadline_reminder.py

@@ -164,6 +164,111 @@ Questions
 
 ---
 
+# GitHub Actions CI/CD
+
+## 프로젝트 구조
+
+```
+java-algorithm/
+├── .github/
+│   ├── workflows/
+│   │   ├── grade-algorithm.yml        # Java 파일 Push/PR 시 자동 채점
+│   │   └── deadline-reminder.yml      # 매일 09:00 KST 마감 알림
+│   ├── scripts/
+│   │   ├── grade_code.py              # Gemini AI 채점 에이전트
+│   │   ├── kakao_notify.py            # 카카오톡 알림 유틸리티
+│   │   └── send_deadline_reminder.py  # 마감 알림 발송
+│   └── deadlines.yml                  # 과제 마감 및 알림 채널 설정
+├── IT/
+│   ├── src/main/                      # 구현 제출 (Java)
+│   └── src/test/study/                # Day별 테스트 파일
+└── devJZen/
+    ├── src/main/                      # 구현 제출 (Java)
+    └── src/test/study/                # Day별 테스트 파일
+```
+
+## Gemini 채점 에이전트
+
+`src/main/*.java` 파일이 Push / PR되면 GitHub Actions가 자동으로:
+1. `google-genai` Python SDK로 Gemini 2.0 Flash API를 단일 호출
+2. 솔루션 코드 + 테스트 파일을 프롬프트에 포함해 5가지 기준으로 PASS/FAIL 채점
+3. 결과를 카카오톡으로 발송하고 PR 코멘트로 첨부
+
+**채점 기준** (중요도 순):
+
+\# | 기준 | 설명
+---|------|------
+1 | 정확성 | 알고리즘 로직이 테스트 케이스를 올바르게 통과하는가?
+2 | 시간복잡도 | 문제에 적합한 Big-O를 사용했는가?
+3 | 알고리즘이해도 | 핵심 자료구조/알고리즘을 올바르게 구현했는가?
+4 | 엣지케이스 | 빈 배열, null, 경계값 등 예외 상황을 처리했는가?
+5 | 코드품질 | 변수명이 명확하고 가독성이 좋으며 중복이 없는가?
+
+**API 통합 방식 (`.github/scripts/grade_code.py`)**:
+
+```python
+from google import genai
+
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    contents=prompt,                                    # 솔루션 코드 + 채점 기준 포함
+    config={"response_mime_type": "application/json"},  # 구조화된 JSON 응답 강제
+)
+grade = json.loads(response.text)
+# → {"results": [{"criterion": "정확성", "status": "PASS", "reason": "..."},...],
+#    "overall": "PASS", "summary": "..."}
+```
+
+## 마감 알림 에이전트
+
+`.github/deadlines.yml`에 과제 마감일을 등록하면 매일 09:00 KST(UTC 00:00)에 24시간·3시간 전 알림 자동 발송.
+
+**카카오톡 OAuth2 흐름 (`.github/scripts/kakao_notify.py`)**:
+1. `KAKAO_REFRESH_TOKENS`로 Kakao 토큰 엔드포인트에 POST → 단기 Access Token 발급
+2. 카카오톡 "나에게 보내기" API로 메시지 발송 (200자 제한 자동 적용)
+
+## 필요한 GitHub Secrets
+
+Secret | 용도
+-------|------
+`GEMINI_API_KEY` | Google AI Studio API 키 (채점)
+`KAKAO_CLIENT_ID` | 카카오 앱 Client ID
+`KAKAO_REFRESH_TOKENS` | 콤마로 구분된 Refresh Token 목록
+`GMAIL_USER` | Gmail 계정 (이메일 알림, 현재 비활성)
+`GMAIL_APP_PASSWORD` | Gmail 앱 비밀번호 (현재 비활성)
+
+---
+
+## 보안 유의사항
+
+### Refresh Token 유출 위험
+`KAKAO_REFRESH_TOKENS`는 **장기 토큰**이다. 유출 시 카카오 계정으로 메시지 발송이 가능하다.
+GitHub Secrets는 로그에서 자동 마스킹되지만, 스크립트 내에서 토큰 값을 `print()`하면 Actions 로그에 그대로 노출된다. `kakao_notify.py`를 수정할 때 토큰 변수를 출력하지 않도록 주의한다.
+
+### 소스 코드 외부 전송
+`src/main/*.java` 전체 내용이 Google(Gemini API)로 전송된다. 이 프로젝트는 학습용 코드이므로 문제없으나, 업무 코드나 개인정보가 포함된 내용을 올리면 안 된다.
+
+### Prompt Injection (PR 코멘트)
+Gemini 응답이 검증 없이 `grade_report.md`로 저장되고 PR 코멘트에 그대로 게시된다. Gemini가 악의적인 마크다운을 반환할 경우 코멘트가 오염될 수 있다. 현재는 `response_mime_type: "application/json"`으로 JSON만 강제하고 있어 위험도가 낮지만, 이유 필드(`reason`)의 내용은 필터링 없이 출력되므로 인지가 필요하다.
+
+### 비활성 시크릿 노출
+`email.enabled: false` 상태에서도 `GMAIL_USER`·`GMAIL_APP_PASSWORD`가 워크플로우 env에 주입된다. 사용하지 않는 시크릿은 워크플로우 step에서 제외하는 것이 원칙이다.
+
+---
+
+## 알려진 결점 및 개선 방향
+
+결점 | 대응 | 위치
+-----|------|------
+**Kakao Refresh Token 만료** | `invalid_grant` 오류 감지 시 재발급 안내 메시지 출력 (토큰 자동 갱신은 카카오 정책상 불가) | `kakao_notify.py` `get_access_token()`
+**Gemini 응답 스키마 미검증** | `validate_grade()`로 criterion·status·overall 타입 및 값 검증. 누락 필드 자동 보완 | `grade_code.py` `validate_grade()`
+**테스트 파일 매핑 불확실** | `find_test_files()`로 `study/` 내 모든 DayNTest.java를 수집해 Gemini 프롬프트에 전부 포함 | `grade_code.py` `find_test_files()`
+**재시도 로직 없음** | `grade_with_retry()`에서 최대 3회 지수 백오프 재시도 (1초 → 2초 대기) | `grade_code.py` `grade_with_retry()`
+**대용량 파일 미처리** | `MAX_FILE_BYTES = 100_000` (100 KB) 초과 시 채점 건너뜀 + 경고 출력 | `grade_code.py` `main()`
+
+---
+
 # 레퍼런스
 
 ## 공식 문서
