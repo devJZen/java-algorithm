@@ -295,5 +295,6 @@ Gemini 응답이 검증 없이 `grade_report.md`로 저장되고 PR 코멘트에
 --- | --- | ---
 2026-06-03 | devJZen/docs 저작권 정비 (Oracle 링크 출처 추가, 문제 설명 직접 서술로 교체), 06-03 Summary 날짜·참고자료 추가, 06-04 Summary 신규 생성 (스택/큐/덱, 병합·카운팅·힙 정렬), README 레퍼런스 정리 | devJZen
 2026-06-03 | 06-05 Summary 신규 생성 (셸·기수·Tim 정렬, 전체 정렬 비교표), study/Example.java 업데이트, README 학습 진행도 1~4회차 구조화 (Summary 링크 + 구현 제출 칸), 과제 확인·회고 2~4회차 행 추가 | devJZen
-2026-06-15 | 자료구조 및 알고리즘 학습방법 재정비, claude 또는 gemini로 개선 방안 또는 채점 방법에 대해서 생각해보기 | devJZen15
+2026-06-15 | 자료구조 및 알고리즘 학습방법 재정비(백준, leetcode 관련 문제 제거), claude 또는 gemini로 개선 방안 또는 채점 방법에 대해서 생각해보기 | devJZen
+2026-06-22 | 채점방법 추가 | devJZen
 
