@@ -91,7 +91,6 @@ Questions
 # 학습 진행도
 
 > 구현 제출은 각 참여자 폴더의 `src/main/` 하위에 작성하세요. (예: `devJZen/src/main/`, `IT/src/main/`)
-> 공부방법에 대해서 고민했는데 서로 풀이방법에 대해서 설명한 것을 기록해야겠다고 느꼈다.
 
 ## 1회차 (2026-06-02) — [Summary](devJZen/docs/2026-06-02-Summary.md)
 
