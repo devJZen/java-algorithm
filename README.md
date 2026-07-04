@@ -241,18 +241,9 @@ Secret | 용도
 
 ## 보안 유의사항
 
-### Refresh Token 유출 위험
-`KAKAO_REFRESH_TOKENS`는 **장기 토큰**이다. 유출 시 카카오 계정으로 메시지 발송이 가능하다.
-GitHub Secrets는 로그에서 자동 마스킹되지만, 스크립트 내에서 토큰 값을 `print()`하면 Actions 로그에 그대로 노출된다. `kakao_notify.py`를 수정할 때 토큰 변수를 출력하지 않도록 주의한다.
+### 보안 유의사항으로 인한 아키텍쳐 재설정
 
-### 소스 코드 외부 전송
-`src/main/*.java` 전체 내용이 Google(Gemini API)로 전송된다. 이 프로젝트는 학습용 코드이므로 문제없으나, 업무 코드나 개인정보가 포함된 내용을 올리면 안 된다.
-
-### Prompt Injection (PR 코멘트)
-Gemini 응답이 검증 없이 `grade_report.md`로 저장되고 PR 코멘트에 그대로 게시된다. Gemini가 악의적인 마크다운을 반환할 경우 코멘트가 오염될 수 있다. 현재는 `response_mime_type: "application/json"`으로 JSON만 강제하고 있어 위험도가 낮지만, 이유 필드(`reason`)의 내용은 필터링 없이 출력되므로 인지가 필요하다.
-
-### 비활성 시크릿 노출
-`email.enabled: false` 상태에서도 `GMAIL_USER`·`GMAIL_APP_PASSWORD`가 워크플로우 env에 주입된다. 사용하지 않는 시크릿은 워크플로우 step에서 제외하는 것이 원칙이다.
+보안과 취약점은 알리지 않는 것이 원칙이므로 아키텍쳐를 재설정한다.
 
 ---
 
@@ -296,4 +287,5 @@ Gemini 응답이 검증 없이 `grade_report.md`로 저장되고 PR 코멘트에
 2026-06-03 | 06-05 Summary 신규 생성 (셸·기수·Tim 정렬, 전체 정렬 비교표), study/Example.java 업데이트, README 학습 진행도 1~4회차 구조화 (Summary 링크 + 구현 제출 칸), 과제 확인·회고 2~4회차 행 추가 | devJZen
 2026-06-15 | 자료구조 및 알고리즘 학습방법 재정비(백준, leetcode 관련 문제 제거), claude 또는 gemini로 개선 방안 또는 채점 방법에 대해서 생각해보기 | devJZen
 2026-06-22 | 채점방법 추가 | devJZen
+2026-07-05 | 보안상 우려나 문제가 있는 경우 `README.md`에 추가하지 않는 것이 관례 | devJZen
 
